@@ -5,30 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YogVardaan</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background:#f4fbf7; color:#333; scroll-behavior:smooth; }
+    body { margin: 0; font-family: Arial, sans-serif; background:#f4fbf7; color:#333; scroll-behavior:smooth; transition:0.3s; }
+    body.dark { background:#1b1b1b; color:#f4f4f4; }
+
     nav { position:fixed; top:0; width:100%; background:#ffffff; padding:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); text-align:center; z-index:1000; }
+    body.dark nav { background:#222; }
     nav a { margin:0 15px; text-decoration:none; color:#2e7d32; font-weight:bold; }
+    nav button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
+
     header { padding:120px 20px 80px; text-align:center; background:linear-gradient(to right,#d4f5e9,#f4fbf7); }
+    body.dark header { background:linear-gradient(to right,#2e2e2e,#1b1b1b); }
     h1 { font-size:48px; margin-bottom:10px; }
     section { padding:60px 20px; text-align:center; }
-    .card { background:white; margin:20px auto; padding:25px; max-width:600px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.08); transition:transform 0.3s; }
-    .card:hover { transform:translateY(-5px); }
-    .button { display:inline-block; padding:12px 25px; background:#4CAF50; color:white; text-decoration:none; border-radius:8px; margin-top:15px; }
-    .faq { cursor:pointer; font-weight:bold; margin-top:15px; }
-    .faq-content { display:none; margin-top:10px; }
-    form input, form textarea { width:90%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc; }
-    form button { padding:10px 20px; border:none; background:#2e7d32; color:white; border-radius:8px; cursor:pointer; }
-    footer { background:#d4f5e9; padding:20px; text-align:center; font-size:14px; }
 
-    /* Image Gallery */
+    .card { background:white; margin:20px auto; padding:25px; max-width:600px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.08); transition:transform 0.3s, opacity 0.5s; opacity:0; transform:translateY(30px); }
+    body.dark .card { background:#2a2a2a; }
+    .card.visible { opacity:1; transform:translateY(0); }
+    .card:hover { transform:scale(1.03); }
+
+    .button { display:inline-block; padding:12px 25px; background:#4CAF50; color:white; text-decoration:none; border-radius:8px; margin-top:15px; }
+
     .gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
     .gallery img { width:280px; height:200px; object-fit:cover; border-radius:12px; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s; }
-    .gallery img:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+    .gallery img:hover { transform:scale(1.1) rotate(1deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
 
-    /* Lightbox */
+    .filter-buttons button { margin:5px; padding:8px 15px; border:none; border-radius:6px; cursor:pointer; }
+
     .lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000; }
     .lightbox img { max-width:90%; max-height:80%; border-radius:15px; }
     .lightbox span { position:absolute; top:30px; right:40px; font-size:30px; color:white; cursor:pointer; }
+
+    .testimonial { font-style:italic; margin-top:20px; min-height:50px; }
+
+    .counter { font-size:40px; color:#2e7d32; }
+
+    footer { background:#d4f5e9; padding:20px; text-align:center; font-size:14px; }
+    body.dark footer { background:#222; }
   </style>
 </head>
 <body>
@@ -39,6 +51,7 @@
   <a href="#services">Services</a>
   <a href="#gallery">Gallery</a>
   <a href="#contact">Contact</a>
+  <button onclick="toggleDarkMode()">🌙</button>
 </nav>
 
 <header id="home">
@@ -50,43 +63,41 @@
 <section id="about">
   <h2>About</h2>
   <div class="card">
-    <p>Certified Yoga Instructor based in New Zealand. I help individuals reduce stress, improve flexibility, build strength, and manage lifestyle conditions through structured yoga and meditation sessions.</p>
+    <p>Certified Yoga Instructor helping individuals reduce stress, improve flexibility, and build strength through guided yoga sessions.</p>
   </div>
 </section>
 
 <section id="services">
   <h2>My Offerings</h2>
-  <div class="card">
-    <h3>Kids Yoga</h3>
-    <p>Improves focus, flexibility, strength, and balance.</p>
-  </div>
-  <div class="card">
-    <h3>Adult Yoga</h3>
-    <p>Supports thyroid, BP, sciatica, cervical issues, and hormonal balance.</p>
-  </div>
-  <div class="card">
-    <h3>Meditation</h3>
-    <p>Guided sessions for mental clarity and emotional well-being.</p>
-  </div>
+  <div class="card"><h3>Kids Yoga</h3><p>Improves focus and balance.</p></div>
+  <div class="card"><h3>Adult Yoga</h3><p>Supports hormonal balance and posture.</p></div>
+  <div class="card"><h3>Meditation</h3><p>Guided mindfulness sessions.</p></div>
+</section>
+
+<section>
+  <h2>Our Impact</h2>
+  <div class="counter" id="studentCount">0</div>
+  <p>Happy Students Worldwide</p>
 </section>
 
 <section id="gallery">
   <h2>Yoga Moments</h2>
+  <div class="filter-buttons">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('pose')">Poses</button>
+    <button onclick="filterImages('meditation')">Meditation</button>
+  </div>
   <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7" onclick="openLightbox(this.src)">
-    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3" onclick="openLightbox(this.src)">
-    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7" data-category="pose" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3" data-category="meditation" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" data-category="pose" onclick="openLightbox(this.src)">
   </div>
 </section>
 
 <section>
-  <h2>FAQs</h2>
+  <h2>Testimonials</h2>
   <div class="card">
-    <div class="faq" onclick="toggleFAQ(this)">Who can join the classes?</div>
-    <div class="faq-content">All age groups are welcome. Sessions are tailored to individual needs.</div>
-
-    <div class="faq" onclick="toggleFAQ(this)">Are classes online?</div>
-    <div class="faq-content">Yes, all sessions are conducted online for your convenience.</div>
+    <div class="testimonial" id="testimonialText"></div>
   </div>
 </section>
 
@@ -113,9 +124,8 @@
 </footer>
 
 <script>
-  function toggleFAQ(element) {
-    const content = element.nextElementSibling;
-    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
   }
 
   function submitForm(event) {
@@ -132,6 +142,49 @@
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
   }
+
+  function filterImages(category) {
+    const images = document.querySelectorAll('.gallery img');
+    images.forEach(img => {
+      if(category === 'all' || img.dataset.category === category) {
+        img.style.display = 'block';
+      } else {
+        img.style.display = 'none';
+      }
+    });
+  }
+
+  const testimonials = [
+    "Amazing yoga sessions! I feel more flexible and calm.",
+    "Very professional and peaceful classes.",
+    "Helped me reduce stress and improve posture."
+  ];
+  let index = 0;
+  function showTestimonial() {
+    document.getElementById('testimonialText').innerText = testimonials[index];
+    index = (index + 1) % testimonials.length;
+  }
+  setInterval(showTestimonial, 3000);
+  showTestimonial();
+
+  function animateCounter() {
+    let count = 0;
+    const target = 250;
+    const counter = document.getElementById('studentCount');
+    const interval = setInterval(() => {
+      count++;
+      counter.innerText = count;
+      if(count >= target) clearInterval(interval);
+    }, 10);
+  }
+  animateCounter();
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  });
+  document.querySelectorAll('.card').forEach(card => observer.observe(card));
 </script>
 
 </body>
