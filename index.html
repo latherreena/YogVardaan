@@ -78,6 +78,43 @@
   </div>
 </section>
 
+<section id="feedback">
+  <h2>Yoga Feedback</h2>
+
+  <div class="card">
+    <form onsubmit="submitFeedback(event)">
+      <input type="text" id="fbName" placeholder="Your Name" required style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc;">
+      
+      <label style="display:block; text-align:left; margin-top:10px; font-weight:bold;">Rate Your Experience:</label>
+      <select id="fbRating" required style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc;">
+        <option value="">Select Rating</option>
+        <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ Excellent</option>
+        <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ Very Good</option>
+        <option value="⭐⭐⭐">⭐⭐⭐ Good</option>
+        <option value="⭐⭐">⭐⭐ Average</option>
+        <option value="⭐">⭐ Needs Improvement</option>
+      </select>
+
+      <textarea id="fbMessage" rows="4" placeholder="Share your yoga experience..." required style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc;"></textarea>
+      
+      <button type="submit" style="padding:12px 20px; border:none; border-radius:8px; background:#2e7d32; color:white; cursor:pointer;">Submit Feedback</button>
+    </form>
+  </div>
+
+  <div id="feedbackList" style="max-width:700px; margin:30px auto;">
+    <div style="background:#ffffff; padding:20px; margin:15px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+      <strong>Anita</strong>
+      <div>⭐⭐⭐⭐⭐</div>
+      <p style="margin-top:8px;">Amazing yoga sessions! I feel more flexible and relaxed.</p>
+    </div>
+    <div style="background:#ffffff; padding:20px; margin:15px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+      <strong>Rahul</strong>
+      <div>⭐⭐⭐⭐</div>
+      <p style="margin-top:8px;">Very professional and calming meditation guidance.</p>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="contact-box">
     <h2>Contact Me</h2>
@@ -122,6 +159,24 @@
     slideIndex = (slideIndex+1)%slides.length;
     slides[slideIndex].classList.add('active');
   },4000);
+
+  function submitFeedback(e){
+    e.preventDefault();
+    const name = document.getElementById('fbName').value;
+    const message = document.getElementById('fbMessage').value;
+
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.style.background = '#ffffff';
+    feedbackDiv.style.padding = '20px';
+    feedbackDiv.style.margin = '15px 0';
+    feedbackDiv.style.borderRadius = '12px';
+    feedbackDiv.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+
+    feedbackDiv.innerHTML = `<strong>${name}</strong><p style="margin-top:8px;">${message}</p>`;
+
+    document.getElementById('feedbackList').prepend(feedbackDiv);
+    e.target.reset();
+  }
 </script>
 
 </body>
