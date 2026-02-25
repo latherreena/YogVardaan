@@ -5,89 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YogVardaan</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f9f4;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      padding: 60px 20px;
-      background-color: #d4f5e9;
-    }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    section {
-      padding: 40px 20px;
-    }
-    .card {
-      background: white;
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 500px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    footer {
-      background-color: #d4f5e9;
-      padding: 20px;
-      margin-top: 40px;
-      font-size: 14px;
-    }
-    a.button {
-      display: inline-block;
-      padding: 12px 25px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      margin-top: 15px;
-    }
+    body { margin: 0; font-family: Arial, sans-serif; background:#f4fbf7; color:#333; scroll-behavior:smooth; }
+    nav { position:fixed; top:0; width:100%; background:#ffffff; padding:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); text-align:center; z-index:1000; }
+    nav a { margin:0 15px; text-decoration:none; color:#2e7d32; font-weight:bold; }
+    header { padding:120px 20px 80px; text-align:center; background:linear-gradient(to right,#d4f5e9,#f4fbf7); }
+    h1 { font-size:48px; margin-bottom:10px; }
+    section { padding:60px 20px; text-align:center; }
+    .card { background:white; margin:20px auto; padding:25px; max-width:600px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.08); transition:transform 0.3s; }
+    .card:hover { transform:translateY(-5px); }
+    .button { display:inline-block; padding:12px 25px; background:#4CAF50; color:white; text-decoration:none; border-radius:8px; margin-top:15px; }
+    .faq { cursor:pointer; font-weight:bold; margin-top:15px; }
+    .faq-content { display:none; margin-top:10px; }
+    form input, form textarea { width:90%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc; }
+    form button { padding:10px 20px; border:none; background:#2e7d32; color:white; border-radius:8px; cursor:pointer; }
+    footer { background:#d4f5e9; padding:20px; text-align:center; font-size:14px; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>YogVardaan</h1>
-    <p>Certified Yoga Instructor based in New Zealand offering online yoga and meditation classes for all age groups.</p>
-    <a href="mailto:info@yourmail.com" class="button">Join a Class</a>
-  </header>
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-  <section>
-    <h2>About</h2>
-    <div class="card">
-      <p>I offer structured yoga sessions to reduce stress, improve flexibility, build strength, and support overall well-being through asanas, pranayama, and meditation.</p>
-    </div>
-  </section>
+<header id="home">
+  <h1>YogVardaan</h1>
+  <p>Online Yoga & Meditation Classes for All Ages</p>
+  <a href="#contact" class="button">Join a Class</a>
+</header>
 
-  <section>
-    <h2>My Offerings</h2>
-    <div class="card">
-      <h3>Kids Yoga</h3>
-      <p>Improve focus, flexibility, strength, and balance in a fun way.</p>
-    </div>
-    <div class="card">
-      <h3>Adult Yoga</h3>
-      <p>Support thyroid, BP, sciatica, cervical issues, and hormonal balance.</p>
-    </div>
-    <div class="card">
-      <h3>Meditation</h3>
-      <p>Guided sessions to calm the mind and improve emotional health.</p>
-    </div>
-  </section>
+<section id="about">
+  <h2>About</h2>
+  <div class="card">
+    <p>Certified Yoga Instructor based in New Zealand. I help individuals reduce stress, improve flexibility, build strength, and manage lifestyle conditions through structured yoga and meditation sessions.</p>
+  </div>
+</section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: lather.rajreena@gmail.com</p>
-    <p>Phone: +64 0220595680</p>
-  </section>
+<section id="services">
+  <h2>My Offerings</h2>
+  <div class="card">
+    <h3>Kids Yoga</h3>
+    <p>Improves focus, flexibility, strength, and balance.</p>
+  </div>
+  <div class="card">
+    <h3>Adult Yoga</h3>
+    <p>Supports thyroid, BP, sciatica, cervical issues, and hormonal balance.</p>
+  </div>
+  <div class="card">
+    <h3>Meditation</h3>
+    <p>Guided sessions for mental clarity and emotional well-being.</p>
+  </div>
+</section>
 
-  <footer>
-    © 2026 YogVardaan. All rights reserved.
-  </footer>
+<section>
+  <h2>FAQs</h2>
+  <div class="card">
+    <div class="faq" onclick="toggleFAQ(this)">Who can join the classes?</div>
+    <div class="faq-content">All age groups are welcome. Sessions are tailored to individual needs.</div>
+
+    <div class="faq" onclick="toggleFAQ(this)">Are classes online?</div>
+    <div class="faq-content">Yes, all sessions are conducted online for your convenience.</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <div class="card">
+    <form onsubmit="submitForm(event)">
+      <input type="text" placeholder="Your Name" required><br>
+      <input type="email" placeholder="Your Email" required><br>
+      <textarea rows="4" placeholder="Your Message" required></textarea><br>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formMessage" style="color:green;"></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 YogVardaan. All rights reserved.
+</footer>
+
+<script>
+  function toggleFAQ(element) {
+    const content = element.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+    document.getElementById('formMessage').innerText = "Thank you! I will contact you soon.";
+    event.target.reset();
+  }
+</script>
 
 </body>
 </html>
