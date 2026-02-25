@@ -19,6 +19,16 @@
     form input, form textarea { width:90%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc; }
     form button { padding:10px 20px; border:none; background:#2e7d32; color:white; border-radius:8px; cursor:pointer; }
     footer { background:#d4f5e9; padding:20px; text-align:center; font-size:14px; }
+
+    /* Image Gallery */
+    .gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .gallery img { width:280px; height:200px; object-fit:cover; border-radius:12px; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s; }
+    .gallery img:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+
+    /* Lightbox */
+    .lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000; }
+    .lightbox img { max-width:90%; max-height:80%; border-radius:15px; }
+    .lightbox span { position:absolute; top:30px; right:40px; font-size:30px; color:white; cursor:pointer; }
   </style>
 </head>
 <body>
@@ -27,6 +37,7 @@
   <a href="#home">Home</a>
   <a href="#about">About</a>
   <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -59,6 +70,15 @@
   </div>
 </section>
 
+<section id="gallery">
+  <h2>Yoga Moments</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" onclick="openLightbox(this.src)">
+  </div>
+</section>
+
 <section>
   <h2>FAQs</h2>
   <div class="card">
@@ -83,6 +103,11 @@
   </div>
 </section>
 
+<div class="lightbox" id="lightbox">
+  <span onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img">
+</div>
+
 <footer>
   © 2026 YogVardaan. All rights reserved.
 </footer>
@@ -97,6 +122,15 @@
     event.preventDefault();
     document.getElementById('formMessage').innerText = "Thank you! I will contact you soon.";
     event.target.reset();
+  }
+
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
   }
 </script>
 
