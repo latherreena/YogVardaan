@@ -76,6 +76,63 @@
   <a href="#about">About</a>
   <a href="#services">Services</a>
   <a href="#gallery">Gallery</a>
+  <a href="#contact { 
+  background:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b') center/cover no-repeat;
+  position:relative;
+  color:white;
+}
+
+#contact::before {
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.6);
+}
+
+#contact .contact-content {
+  position:relative;
+  z-index:1;
+  max-width:600px;
+  margin:auto;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  border-radius:20px;
+}
+
+#contact input, 
+#contact textarea {
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+}
+
+#contact button {
+  width:100%;
+  padding:12px;
+  background:#4CAF50;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#contact button:hover {
+  background:#388e3c;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
   <a href="#contact">Contact</a>
   <button onclick="toggleDarkMode()">🌙</button>
 </nav>
@@ -96,6 +153,54 @@
   <h2>About</h2>
   <div class="card">
     <p>Certified Yoga Instructor helping individuals reduce stress, improve flexibility, and build strength through guided yoga sessions.</p>
+  </div>
+</section>
+
+<section id="services">
+  <h2>My Offerings</h2>
+  <div class="card"><h3>Kids Yoga</h3><p>Improves focus and balance.</p></div>
+  <div class="card"><h3>Adult Yoga</h3><p>Supports hormonal balance and posture.</p></div>
+  <div class="card"><h3>Meditation</h3><p>Guided mindfulness sessions.</p></div>
+</section>
+
+<section>
+  <h2>Our Impact</h2>
+  <div class="counter" id="studentCount">0</div>
+  <p>Happy Students Worldwide</p>
+</section>
+
+<section id="gallery">
+  <h2>Yoga Moments</h2>
+  <div class="filter-buttons">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('pose')">Poses</button>
+    <button onclick="filterImages('meditation')">Meditation</button>
+  </div>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7" data-category="pose" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3" data-category="meditation" onclick="openLightbox(this.src)">
+    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" data-category="pose" onclick="openLightbox(this.src)">
+  </div>
+</section>
+
+<section>
+  <h2>Testimonials</h2>
+  <div class="card">
+    <div class="testimonial" id="testimonialText"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-content">
+    <h2>Contact Me</h2>
+    <p>Begin your yoga journey today 🌿</p>
+    <form onsubmit="submitForm(event)">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formMessage" style="color:#90ee90;"></p>
   </div>
 </section>
 
