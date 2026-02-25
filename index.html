@@ -13,7 +13,33 @@
     nav a { margin:0 15px; text-decoration:none; color:#2e7d32; font-weight:bold; }
     nav button { padding:6px 12px; border:none; border-radius:6px; cursor:pointer; }
 
-    header { padding:120px 20px 80px; text-align:center; background:linear-gradient(to right,#d4f5e9,#f4fbf7); }
+    header { position:relative; padding:0; height:100vh; overflow:hidden; }
+
+.hero-slide {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  transition:opacity 1s ease-in-out;
+  opacity:0;
+}
+
+.hero-slide.active { opacity:1; }
+
+.hero-content {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+  color:white;
+  background:rgba(0,0,0,0.4);
+  padding:30px;
+  border-radius:15px;
+}
+
+.hero-content h1 { font-size:55px; margin-bottom:10px; }
     body.dark header { background:linear-gradient(to right,#2e2e2e,#1b1b1b); }
     h1 { font-size:48px; margin-bottom:10px; }
     section { padding:60px 20px; text-align:center; }
@@ -55,9 +81,15 @@
 </nav>
 
 <header id="home">
-  <h1>YogVardaan</h1>
-  <p>Online Yoga & Meditation Classes for All Ages</p>
-  <a href="#contact" class="button">Join a Class</a>
+  <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773');"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7');"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1552196563-55cd4e45efb3');"></div>
+
+  <div class="hero-content">
+    <h1>YogVardaan</h1>
+    <p>Online Yoga & Meditation Classes for All Ages</p>
+    <a href="#contact" class="button">Join a Class</a>
+  </div>
 </header>
 
 <section id="about">
@@ -178,6 +210,16 @@
     }, 10);
   }
   animateCounter();
+
+  // Hero Image Slider
+  const slides = document.querySelectorAll('.hero-slide');
+  let slideIndex = 0;
+  function showSlides() {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+  }
+  setInterval(showSlides, 4000);
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
