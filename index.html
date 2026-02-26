@@ -78,32 +78,20 @@
   </div>
 </section>
 
-<section id="feedback" style="background:#f0faf5;">
-  <h2 style="margin-bottom:40px;">Yoga Feedback</h2>
+<section id="quotes" style="background:#f0faf5;">
+  <h2 style="margin-bottom:50px;">What Students Say</h2>
 
-  <div style="max-width:500px; margin:0 auto 40px; background:white; padding:30px; border-radius:20px; box-shadow:0 8px 25px rgba(0,0,0,0.08);">
-    <form onsubmit="submitFeedback(event)">
-      <input type="text" id="fbName" placeholder="Your Name" required 
-        style="width:100%; padding:14px; margin-bottom:15px; border-radius:30px; border:1px solid #e0e0e0; outline:none;">
-
-      <textarea id="fbMessage" rows="3" placeholder="Share your experience..." required
-        style="width:100%; padding:14px; margin-bottom:20px; border-radius:20px; border:1px solid #e0e0e0; outline:none; resize:none;"></textarea>
-      
-      <button type="submit" 
-        style="width:100%; padding:14px; border:none; border-radius:30px; background:linear-gradient(135deg,#43a047,#66bb6a); color:white; font-weight:bold; cursor:pointer; transition:0.3s;">
-        Submit
-      </button>
-    </form>
-  </div>
-
-  <div id="feedbackList" style="max-width:650px; margin:auto; display:flex; flex-direction:column; gap:20px;">
-    <div style="background:white; padding:20px 25px; border-radius:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
-      <strong style="color:#2e7d32;">Anita</strong>
-      <p style="margin-top:8px; color:#555;">Amazing yoga sessions! I feel more flexible and relaxed.</p>
+  <div style="max-width:750px; margin:auto; display:flex; flex-direction:column; gap:30px;">
+    <div style="background:white; padding:30px; border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,0.08); font-style:italic; position:relative;">
+      <div style="font-size:40px; color:#43a047; position:absolute; top:10px; left:20px;">“</div>
+      <p style="margin-top:20px; color:#555;">Yoga with Reena has completely transformed my flexibility and reduced my stress levels.</p>
+      <strong style="display:block; margin-top:15px; color:#2e7d32;">– Anita</strong>
     </div>
-    <div style="background:white; padding:20px 25px; border-radius:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
-      <strong style="color:#2e7d32;">Rahul</strong>
-      <p style="margin-top:8px; color:#555;">Very calming and professional guidance. Highly recommended.</p>
+
+    <div style="background:white; padding:30px; border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,0.08); font-style:italic; position:relative;">
+      <div style="font-size:40px; color:#43a047; position:absolute; top:10px; left:20px;">“</div>
+      <p style="margin-top:20px; color:#555;">The meditation sessions are calming and powerful. I feel more balanced and peaceful.</p>
+      <strong style="display:block; margin-top:15px; color:#2e7d32;">– Rahul</strong>
     </div>
   </div>
 </section>
@@ -153,24 +141,7 @@
     slides[slideIndex].classList.add('active');
   },4000);
 
-  function submitFeedback(e){
-    e.preventDefault();
-    const name = document.getElementById('fbName').value;
-    const message = document.getElementById('fbMessage').value;
-
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.style.background = '#ffffff';
-    feedbackDiv.style.padding = '20px';
-    feedbackDiv.style.margin = '15px 0';
-    feedbackDiv.style.borderRadius = '12px';
-    feedbackDiv.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-
-    feedbackDiv.innerHTML = `<strong>${name}</strong><p style="margin-top:8px;">${message}</p>`;
-
-    document.getElementById('feedbackList').prepend(feedbackDiv);
-    e.target.reset();
-  }
-</script>
+  </script>
 
 </body>
 </html>
